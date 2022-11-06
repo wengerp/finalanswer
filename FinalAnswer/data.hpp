@@ -1,0 +1,250 @@
+#ifndef _DATA_HPP_
+#define _DATA_HPP_
+
+#include <list>
+#include <string>
+#include "piece.hpp"
+
+using namespace std;
+
+list<Piece> readData(list<Piece> arrPieces) {
+
+      // 2X2
+//    arrPieces.push_back(Piece("ORYG"));
+//    arrPieces.push_back(Piece("RYBY"));
+//    arrPieces.push_back(Piece("GYRR"));
+//    arrPieces.push_back(Piece("YBYR"));
+    
+//    arrPieces.push_back(Piece("ORGG"));
+//    arrPieces.push_back(Piece("GGOP"));
+//    arrPieces.push_back(Piece("GBYO"));
+//    arrPieces.push_back(Piece("RYBG"));
+
+      // 3X3
+//    arrPieces.push_back(Piece("ORGG"));
+//    arrPieces.push_back(Piece("RYBG"));
+//    arrPieces.push_back(Piece("YPGB"));
+//    arrPieces.push_back(Piece("GGOP"));
+//    arrPieces.push_back(Piece("GBYO"));
+//    arrPieces.push_back(Piece("BGGY"));
+//    arrPieces.push_back(Piece("PORG"));
+//    arrPieces.push_back(Piece("OYGR"));
+//    arrPieces.push_back(Piece("YGOG"));
+
+      // 4x4
+//    arrPieces.push_back(Piece("RBYP"));
+//    arrPieces.push_back(Piece("BBOY"));
+//    arrPieces.push_back(Piece("BGGO"));
+//    arrPieces.push_back(Piece("GORG"));
+//    arrPieces.push_back(Piece("PYBG"));
+//    arrPieces.push_back(Piece("YOGB"));
+//    arrPieces.push_back(Piece("OGPG"));
+//    arrPieces.push_back(Piece("GRYP"));
+//    arrPieces.push_back(Piece("GBPG"));
+//    arrPieces.push_back(Piece("BGRP"));
+//    arrPieces.push_back(Piece("GPOR"));
+//    arrPieces.push_back(Piece("PYRO"));
+//    arrPieces.push_back(Piece("GPOB"));
+//    arrPieces.push_back(Piece("PRYO"));
+//    arrPieces.push_back(Piece("RORY"));
+//    arrPieces.push_back(Piece("ORBR"));
+
+//    arrPieces.push_back(Piece("RBYP"));
+//    arrPieces.push_back(Piece("BGGO"));
+//    arrPieces.push_back(Piece("GORG"));
+//    arrPieces.push_back(Piece("PYBG"));
+//    arrPieces.push_back(Piece("YOGB"));
+//    arrPieces.push_back(Piece("OGPG"));
+//    arrPieces.push_back(Piece("GRYP"));
+//    arrPieces.push_back(Piece("GBPG"));
+//    arrPieces.push_back(Piece("BGRP"));
+//    arrPieces.push_back(Piece("GPOR"));
+//    arrPieces.push_back(Piece("PYRO"));
+//    arrPieces.push_back(Piece("GPOB"));
+//    arrPieces.push_back(Piece("PRYO"));
+//    arrPieces.push_back(Piece("RORY"));
+//    arrPieces.push_back(Piece("ORBR"));
+//    arrPieces.push_back(Piece("BBOY"));
+
+//    arrPieces.push_back(Piece("NGGO"));
+//    arrPieces.push_back(Piece("YBGR"));
+//    arrPieces.push_back(Piece("NYBR"));
+//    arrPieces.push_back(Piece("RNRO"));
+//    arrPieces.push_back(Piece("GBGO"));
+//    arrPieces.push_back(Piece("GRBN"));
+//    arrPieces.push_back(Piece("RGBO"));
+//    arrPieces.push_back(Piece("ORYR"));
+//    arrPieces.push_back(Piece("NNOY"));
+//    arrPieces.push_back(Piece("RYOB"));
+//    arrPieces.push_back(Piece("BONG"));
+//    arrPieces.push_back(Piece("YNGB"));
+//    arrPieces.push_back(Piece("ORGG"));
+//    arrPieces.push_back(Piece("BGGN"));
+//    arrPieces.push_back(Piece("YROB"));
+//    arrPieces.push_back(Piece("OGNY"));
+
+    
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+
+      // 5x5
+//    arrPieces.push_back(Piece("NRYG"));
+//    arrPieces.push_back(Piece("RKPY"));
+//    arrPieces.push_back(Piece("KYBP"));
+//    arrPieces.push_back(Piece("YYGB"));
+//    arrPieces.push_back(Piece("YGGG"));
+//    arrPieces.push_back(Piece("GYKR"));
+//    arrPieces.push_back(Piece("YPNK"));
+//    arrPieces.push_back(Piece("PBPN"));
+//    arrPieces.push_back(Piece("BGKP"));
+//    arrPieces.push_back(Piece("GGPK"));
+//    arrPieces.push_back(Piece("RKRR"));
+//    arrPieces.push_back(Piece("KNOR"));
+//    arrPieces.push_back(Piece("NPGO"));
+//    arrPieces.push_back(Piece("PKOG"));
+//    arrPieces.push_back(Piece("KPBO"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RONR"));
+//    arrPieces.push_back(Piece("OGBN"));
+//    arrPieces.push_back(Piece("GOBB"));
+//    arrPieces.push_back(Piece("OBOB"));
+//    arrPieces.push_back(Piece("RRKP"));
+//    arrPieces.push_back(Piece("RNYK"));
+//    arrPieces.push_back(Piece("NBGY"));
+//    arrPieces.push_back(Piece("BBPG"));
+//    arrPieces.push_back(Piece("BOBP"));
+    
+//    arrPieces.push_back(Piece("NRYG"));
+//    arrPieces.push_back(Piece("RSPY"));
+//    arrPieces.push_back(Piece("SYBP"));
+//    arrPieces.push_back(Piece("YYGB"));
+//    arrPieces.push_back(Piece("YGGG"));
+//    arrPieces.push_back(Piece("GYSR"));
+//    arrPieces.push_back(Piece("YPNS"));
+//    arrPieces.push_back(Piece("PBPN"));
+//    arrPieces.push_back(Piece("BGSP"));
+//    arrPieces.push_back(Piece("GGPS"));
+//    arrPieces.push_back(Piece("RSRR"));
+//    arrPieces.push_back(Piece("SNOR"));
+//    arrPieces.push_back(Piece("NPGO"));
+//    arrPieces.push_back(Piece("PSOG"));
+//    arrPieces.push_back(Piece("SPBO"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RONR"));
+//    arrPieces.push_back(Piece("OGBN"));
+//    arrPieces.push_back(Piece("GOBB"));
+//    arrPieces.push_back(Piece("OBOB"));
+//    arrPieces.push_back(Piece("RRSP"));
+//    arrPieces.push_back(Piece("RNYS"));
+//    arrPieces.push_back(Piece("NBGY"));
+//    arrPieces.push_back(Piece("BBPG"));
+//    arrPieces.push_back(Piece("BOBP"));
+
+    // 6x6
+//    arrPieces.push_back(Piece("GGGY"));
+//    arrPieces.push_back(Piece("GPSG"));
+//    arrPieces.push_back(Piece("PBOS"));
+//    arrPieces.push_back(Piece("BOBO"));
+//    arrPieces.push_back(Piece("OBPB"));
+//    arrPieces.push_back(Piece("BRNP"));
+//    arrPieces.push_back(Piece("YGBY"));
+//    arrPieces.push_back(Piece("GSPB"));
+//    arrPieces.push_back(Piece("SOGP"));
+//    arrPieces.push_back(Piece("OBBG"));
+//    arrPieces.push_back(Piece("BPGB"));
+//    arrPieces.push_back(Piece("PNOG"));
+//    arrPieces.push_back(Piece("YBPS"));
+//    arrPieces.push_back(Piece("BPNP"));
+//    arrPieces.push_back(Piece("PGON"));
+//    arrPieces.push_back(Piece("GBNO"));
+//    arrPieces.push_back(Piece("BGYN"));
+//    arrPieces.push_back(Piece("GORY"));
+//    arrPieces.push_back(Piece("SPYR"));
+//    arrPieces.push_back(Piece("PNSY"));
+//    arrPieces.push_back(Piece("NORS"));
+//    arrPieces.push_back(Piece("ONRR"));
+//    arrPieces.push_back(Piece("NYSR"));
+//    arrPieces.push_back(Piece("YRGS"));
+//    arrPieces.push_back(Piece("RYGN"));
+//    arrPieces.push_back(Piece("YSRG"));
+//    arrPieces.push_back(Piece("SRRR"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RSPR"));
+//    arrPieces.push_back(Piece("SGPP"));
+//    arrPieces.push_back(Piece("NGYN"));
+//    arrPieces.push_back(Piece("GRBY"));
+//    arrPieces.push_back(Piece("RRNB"));
+//    arrPieces.push_back(Piece("RRON"));
+//    arrPieces.push_back(Piece("RPPO"));
+//    arrPieces.push_back(Piece("PPBP"));
+    
+    // 7x7
+//    arrPieces.push_back(Piece("NNGY"));
+//    arrPieces.push_back(Piece("NRYG"));
+//    arrPieces.push_back(Piece("RSPY"));
+//    arrPieces.push_back(Piece("SYBP"));
+//    arrPieces.push_back(Piece("YYGB"));
+//    arrPieces.push_back(Piece("YGGG"));
+//    arrPieces.push_back(Piece("GSOG"));
+//    arrPieces.push_back(Piece("YGRB"));
+//    arrPieces.push_back(Piece("GYSR"));
+//    arrPieces.push_back(Piece("YPNS"));
+//    arrPieces.push_back(Piece("PBPN"));
+//    arrPieces.push_back(Piece("BGSP"));
+//    arrPieces.push_back(Piece("GGPS"));
+//    arrPieces.push_back(Piece("GONP"));
+//    arrPieces.push_back(Piece("BRRN"));
+//    arrPieces.push_back(Piece("RSRR"));
+//    arrPieces.push_back(Piece("SNOR"));
+//    arrPieces.push_back(Piece("NPGO"));
+//    arrPieces.push_back(Piece("PSOG"));
+//    arrPieces.push_back(Piece("SPBO"));
+//    arrPieces.push_back(Piece("PNBB"));
+//    arrPieces.push_back(Piece("NRRO"));
+//    arrPieces.push_back(Piece("RRRR"));
+//    arrPieces.push_back(Piece("RONR"));
+//    arrPieces.push_back(Piece("OGBN"));
+//    arrPieces.push_back(Piece("GOBB"));
+//    arrPieces.push_back(Piece("OBOB"));
+//    arrPieces.push_back(Piece("BBSO"));
+//    arrPieces.push_back(Piece("ORPP"));
+//    arrPieces.push_back(Piece("RRSP"));
+//    arrPieces.push_back(Piece("RNYS"));
+//    arrPieces.push_back(Piece("NBGY"));
+//    arrPieces.push_back(Piece("BBPG"));
+//    arrPieces.push_back(Piece("BOBP"));
+//    arrPieces.push_back(Piece("OSRB"));
+//    arrPieces.push_back(Piece("PPPB"));
+//    arrPieces.push_back(Piece("PSGP"));
+//    arrPieces.push_back(Piece("SYRG"));
+//    arrPieces.push_back(Piece("YGOR"));
+//    arrPieces.push_back(Piece("GPNO"));
+//    arrPieces.push_back(Piece("PBBN"));
+//    arrPieces.push_back(Piece("BRBB"));
+//    arrPieces.push_back(Piece("BPNS"));
+//    arrPieces.push_back(Piece("PGSN"));
+//    arrPieces.push_back(Piece("GRYS"));
+//    arrPieces.push_back(Piece("ROGY"));
+//    arrPieces.push_back(Piece("ONOG"));
+//    arrPieces.push_back(Piece("NBBO"));
+//    arrPieces.push_back(Piece("BBSB"));
+    
+    return arrPieces;
+}
+
+#endif
+
