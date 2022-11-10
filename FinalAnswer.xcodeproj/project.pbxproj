@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA00E7B7290DD046007C2BEF /* data.hpp in Sources */ = {isa = PBXBuildFile; fileRef = AA00E7B6290DD046007C2BEF /* data.hpp */; };
+		AA3317A5291ABC3D00D206E6 /* solution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3317A3291ABC3D00D206E6 /* solution.cpp */; };
 		AA3D1F702916A15200B45B10 /* args.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1F6F2916A15200B45B10 /* args.cpp */; };
 		AAA8E6C2290B07C800B0CD77 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA8E6C1290B07C800B0CD77 /* main.cpp */; };
 		AAA8E6C4290B0D2D00B0CD77 /* piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA8E6C3290B0D2D00B0CD77 /* piece.cpp */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		AA00E7B6290DD046007C2BEF /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		AA00E7B92910953F007C2BEF /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
+		AA3317A3291ABC3D00D206E6 /* solution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = solution.cpp; sourceTree = "<group>"; };
+		AA3317A4291ABC3D00D206E6 /* solution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = solution.hpp; sourceTree = "<group>"; };
 		AA3D1F6C2916998B00B45B10 /* termcolor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = termcolor.hpp; sourceTree = "<group>"; };
 		AA3D1F6E2916A15200B45B10 /* args.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = args.h; sourceTree = "<group>"; };
 		AA3D1F6F2916A15200B45B10 /* args.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = args.cpp; sourceTree = "<group>"; };
@@ -38,6 +41,8 @@
 		AA3D1F7F291728F000B45B10 /* data5x5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data5x5.txt; sourceTree = "<group>"; };
 		AA3D1F802917291C00B45B10 /* data6x6.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data6x6.txt; sourceTree = "<group>"; };
 		AA3D1F812917296800B45B10 /* data7x7.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data7x7.txt; sourceTree = "<group>"; };
+		AA3D1F8229184A2B00B45B10 /* data8x8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = data8x8.txt; sourceTree = "<group>"; };
+		AA8BCCD8291871BA0050DDE7 /* Bildschirmfoto 2022-11-06 um 23.46.13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bildschirmfoto 2022-11-06 um 23.46.13.png"; sourceTree = "<group>"; };
 		AAA8E6C1290B07C800B0CD77 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AAA8E6C3290B0D2D00B0CD77 /* piece.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = piece.cpp; sourceTree = "<group>"; };
 		AAF68BC5290AE4D000D33E9B /* FinalAnswer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FinalAnswer; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,12 +73,14 @@
 		AA3D1F7A291727B200B45B10 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				AA8BCCD8291871BA0050DDE7 /* Bildschirmfoto 2022-11-06 um 23.46.13.png */,
 				AA3D1F7B291727ED00B45B10 /* data2x2.txt */,
 				AA3D1F7D2917286500B45B10 /* data3x3.txt */,
 				AA3D1F7E291728C300B45B10 /* data4x4.txt */,
 				AA3D1F7F291728F000B45B10 /* data5x5.txt */,
 				AA3D1F802917291C00B45B10 /* data6x6.txt */,
 				AA3D1F812917296800B45B10 /* data7x7.txt */,
+				AA3D1F8229184A2B00B45B10 /* data8x8.txt */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -108,6 +115,8 @@
 				AA3D1F6C2916998B00B45B10 /* termcolor.hpp */,
 				AA3D1F6F2916A15200B45B10 /* args.cpp */,
 				AA3D1F6E2916A15200B45B10 /* args.h */,
+				AA3317A3291ABC3D00D206E6 /* solution.cpp */,
+				AA3317A4291ABC3D00D206E6 /* solution.hpp */,
 			);
 			path = FinalAnswer;
 			sourceTree = "<group>";
@@ -173,6 +182,7 @@
 				AAF68BD6290AE50500D33E9B /* Singleton.cpp in Sources */,
 				AAA8E6C4290B0D2D00B0CD77 /* piece.cpp in Sources */,
 				AA3D1F702916A15200B45B10 /* args.cpp in Sources */,
+				AA3317A5291ABC3D00D206E6 /* solution.cpp in Sources */,
 				AA00E7B7290DD046007C2BEF /* data.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

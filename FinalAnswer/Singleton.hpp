@@ -6,7 +6,10 @@
 #include <vector>
 #include <cmath>
 #include "piece.hpp"
-#include "Singleton.hpp"
+#include "solution.hpp"
+
+// forward declaration
+class Solution;
 
 class Singleton {
 
@@ -15,7 +18,7 @@ protected:
 
     static Singleton* singleton;
 
-    vector<vector<Piece>>* aAllSolution;
+    vector<Solution>* aAllSolution;
     long numIterations;
     long numPieces;
     long rowSize;
@@ -27,12 +30,18 @@ public:
 
     static Singleton *GetInstance();
 
-    vector<vector<Piece>>* getAllSolutions() {
+    vector<Solution>* getAllSolution() {
         return aAllSolution;
     }
 
-    void setAllSolution(vector<vector<Piece>>* value) {
-        aAllSolution = value;
+    void addSolution(Solution s) {
+        aAllSolution->push_back(s);
+    }
+    
+    void setAllSolution(vector<Solution>* value) {
+        for ( Solution sol : *value ) {
+            this->aAllSolution->push_back(sol);
+        }
     }
     
     void setNumPieces(long pPieces) {

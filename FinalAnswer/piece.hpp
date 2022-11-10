@@ -81,7 +81,10 @@ public:
     
 
     void print() const {
-        cout << termcolor::blue << "PIECE: ( _id:" << setw(3) << termcolor::reset << to_string(_id) << termcolor::blue << ", _colors:" << termcolor::reset << _colors << termcolor::blue << ", _originalColors:" << termcolor::blue << _originalColors << " )" << termcolor::reset << endl;
+        cout << termcolor::blue << "PIECE: ( _id:" << setw(3) << termcolor::reset << to_string(_id);
+        cout << termcolor::blue << ", _colors:" << termcolor::reset << _colors;
+        cout << termcolor::blue << ", _originalColors:" << termcolor::blue << _originalColors;
+        cout << " )" << termcolor::reset << endl;
     };
     
     string toString() const {

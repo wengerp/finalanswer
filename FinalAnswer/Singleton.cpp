@@ -1,7 +1,7 @@
-#ifndef _SINGLETON_CPP
-#define _SINGLETON_CPP
-
-
+/*
+ Singleton.cpp
+ 
+ */
 
 #include <stdio.h>
 #include <vector>
@@ -9,9 +9,10 @@
 #include "Singleton.hpp"
 
 Singleton::Singleton() {
+    aAllSolution = new vector<Solution>();
     numIterations = 0;
+    numPieces = 0;
     rowSize = 0;
-    aAllSolution = {};
     possibleMatch = Piece();
     }
 
@@ -28,4 +29,3 @@ Singleton *Singleton::GetInstance()
 
 
 
-#endif

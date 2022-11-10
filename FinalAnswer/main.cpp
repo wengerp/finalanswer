@@ -4,12 +4,15 @@
 #include <cmath>
 #include <algorithm>
 #include <string>
+#include <sstream>
 #include <thread>
 #include <vector>
+#include <map>
 #include <iterator>
 #include <fstream>
 #include <chrono>
 #include "piece.hpp"
+#include "solution.hpp"
 #include "Singleton.hpp"
 #include "data.hpp"
 #include "termcolor.hpp"
@@ -37,27 +40,19 @@ list<Piece>* generatePieceArray(list<Piece> *aPiece) {
 
 bool compareLeftUp(int flag, const Piece &oCurrentPiece, const Piece &oCheckPiece) {
 
-    if (oCurrentPiece.getId() == oCheckPiece.getId()) {
-        return false;
-    }
-    
+ 
     switch (flag) {
         case 1: // left
             
-            if (oCheckPiece.getColors()[0] != oCurrentPiece.getColors()[1]) {
-                return false; }
-            else if (oCheckPiece.getColors()[3] != oCurrentPiece.getColors()[2]) {
-                return false; }
-            
+            if (oCheckPiece.getColors()[0] != oCurrentPiece.getColors()[1] || oCheckPiece.getColors()[3] != oCurrentPiece.getColors()[2]) {
+                return false;
+            }
             break;
         case 2: // up
             
-            if (oCheckPiece.getColors()[0] != oCurrentPiece.getColors()[3]) {
-                return false; }
-            else if (oCheckPiece.getColors()[1] != oCurrentPiece.getColors()[2]) {
-                return false; }
-            
-//            return true;
+            if (oCheckPiece.getColors()[0] != oCurrentPiece.getColors()[3] || oCheckPiece.getColors()[1] != oCurrentPiece.getColors()[2]) {
+                return false;
+            }
             break;
     }
     return true;
@@ -85,14 +80,15 @@ void cleanupAvailablePieces(list<Piece> *aNewAvailablePiece, const vector<Piece>
     }
 }
 
-void findNextPiece(vector<Piece> *aCurrentSolution, list<Piece> *aAvailablePieces, int iDepth) {
-    ++iDepth;
+void findNextPiece(vector<Piece> *aCurrentSolution, list<Piece> *aAvailablePieces) {
     vector<Piece> aPossibleMatches;
     Singleton::GetInstance()->incNumIterations();
+    long ROW_SIZE = Singleton::GetInstance()->getRowSize();
 
     // found solution
     if (aCurrentSolution->size() == (int)Singleton::GetInstance()->getNumPieces())  {
-        Singleton::GetInstance()->getAllSolutions()->push_back(*aCurrentSolution);
+        
+        Singleton::GetInstance()->addSolution(new Solution(aCurrentSolution));
          return;
     
     } else if (aCurrentSolution->size() == 0) {
@@ -100,7 +96,6 @@ void findNextPiece(vector<Piece> *aCurrentSolution, list<Piece> *aAvailablePiece
 
     } else {
         // if first row then just check left
-        long ROW_SIZE = Singleton::GetInstance()->getRowSize();
         int iNewIndex = (int)aCurrentSolution->size();
         int iCurrentPieceIndex = (int)aCurrentSolution->size() -1;
    
@@ -130,7 +125,7 @@ void findNextPiece(vector<Piece> *aCurrentSolution, list<Piece> *aAvailablePiece
     }
     
     for(auto & oPossibleMatch : aPossibleMatches) {
-        
+
         vector<Piece> aNewSolution;
         
         copy(aCurrentSolution->begin(), aCurrentSolution->end(), back_inserter(aNewSolution));
@@ -140,18 +135,17 @@ void findNextPiece(vector<Piece> *aCurrentSolution, list<Piece> *aAvailablePiece
         copy(aAvailablePieces->begin(), aAvailablePieces->end(), back_inserter(aNewAvailablePiece));
         cleanupAvailablePieces(&aNewAvailablePiece, &aNewSolution);
        
-        findNextPiece(&aNewSolution, &aNewAvailablePiece, iDepth);
+        findNextPiece(&aNewSolution, &aNewAvailablePiece);
     }
 }
 
-template<typename T>
-bool isEqual(const std::vector<T> &first, const std::vector<T> &second)
+
+bool isEqual(const std::vector<Piece> &first, const std::vector<Piece> &second)
 {
     if (first.size() != second.size()) {
         return false;
     }
 
-    return first == second;
     for (auto p1 : first) {
         for (auto p2 : second) {
             if (p1.getId() != p2.getId()) {
@@ -164,7 +158,7 @@ bool isEqual(const std::vector<T> &first, const std::vector<T> &second)
 
 void startRecursion(vector<Piece> &arrSolution, list<Piece> &arrPieces, Piece possibleMatch) {
     Singleton::GetInstance()->setPossibleMatch(possibleMatch);
-    findNextPiece(&arrSolution, &arrPieces, 0);
+    findNextPiece(&arrSolution, &arrPieces);
 }
 
   void ClearScreen()
@@ -178,26 +172,7 @@ void line() {
 cout << termcolor::blue << "------------------------------------------------------------" << termcolor::reset << endl;
 }
 
-//void setPos(std::ostream& _os, const std::streamsize& _x, const std::streamsize& _y)
-//{
-//    char tmp = _os.fill();
-//
-//    if(_y>0) {
-//            _os.fill('\n');
-//            _os.width(_y);
-//            _os << '\n';
-//    }
-//    if(_x>0) {
-//            _os.fill(' ');
-//            _os.width(_x);
-//            _os << ' ';
-//    }
-//    _os.flush();
-//    _os.fill(tmp);
-//}
-
-
-void colorField(string sC) {
+void colorField(const string sC)  {
     if ( sC == "B" ) cout << termcolor::on_blue << termcolor::white  << " " << sC << " " <<termcolor::reset;
     else if ( sC == "G" ) cout << termcolor::on_bright_green << termcolor::grey << " " << sC << " " << termcolor::reset;
     else if ( sC == "K" ) cout << termcolor::on_grey << termcolor::white << " " << sC << " " << termcolor::reset;
@@ -221,18 +196,26 @@ vector<string> readFileToVector(const string& filename)
     }
     return lines;
 }
+    
+void makeUnique(vector<Solution> *solutions, map<string,Solution>* solmap) {
+    vector<Solution>::iterator it;
+    for ( it = solutions->begin(); it != solutions->end(); ++it ) {
+        it->prepareOutput();
+        solmap->insert( pair<string,Solution>(it->getId(),*it) );
+    }
+}
 
 
 int main(int argc, char** argv) {
     
     bool multithreading = false;
-    bool uniquesolutions = false;
+    bool uqSolution = false;
     bool verbose = false;
 
-    ArgParser parser("The final answer to the Colors problem.\nThere is no known faster solution than this tool.\n\nUsage: FinalAnswer [--multithreading] [--uniquesolutions] [--file <FILENAME>].\nThe default settings are: singletherading and all solutions.", "2.0");
+    ArgParser parser("The final answer to the Colors problem.\nThere is no known faster solution than this tool.\n\nUsage: FinalAnswer [--multithreading] [--uqSolution] [--file <FILENAME>].\nThe default settings are: singletherading and all solutions.", "2.0");
 
     parser.flag("multithreading");
-    parser.flag("uniquesolutions");
+    parser.flag("uqSolution");
     parser.flag("verbose");
     parser.option("file","data.txt");
 
@@ -241,8 +224,8 @@ int main(int argc, char** argv) {
     if (parser.found("multithreading")) {
         multithreading = true;
     }
-    if (parser.found("uniquesolutions")) {
-        uniquesolutions = true;
+    if (parser.found("uqSolution")) {
+        uqSolution = true;
     }
     if (parser.found("verbose")) {
         verbose = true;
@@ -272,7 +255,7 @@ int main(int argc, char** argv) {
     Singleton::GetInstance()->setNumPieces(arrPieces.size());
     arrPieces = *(generatePieceArray(&arrPieces));
     vector<Piece> arrSolution;
-    vector<vector<Piece>> aSolutions;
+    vector<Solution> aSolutions = vector<Solution>();
     Singleton::GetInstance()->setAllSolution(&aSolutions);
     vector<Piece> aPossibleMatches;
     copy(arrPieces.begin(), arrPieces.end(), back_inserter(aPossibleMatches));
@@ -304,33 +287,21 @@ int main(int argc, char** argv) {
     cout << termcolor::reset << "...finished calculation" << endl;
     line();
 
-    vector<vector<Piece>> *solutions = Singleton::GetInstance()->getAllSolutions();
-    vector<vector<Piece>> uniqueSolutions = vector<vector<Piece>>();
+    map<string,Solution>* solmap = new map<string,Solution>;
+    makeUnique(Singleton::GetInstance()->getAllSolution(), solmap);
 
-    if ( uniquesolutions ) {
-        for( int i = 0; i < solutions->size(); ++i) {
-            vector<Piece> visitor = solutions->at(i);
-                bool areEqual = isEqual(solutions->at(i), visitor);
-                if ( areEqual ){
-                    if ( find(uniqueSolutions.begin(),uniqueSolutions.end(), visitor) != uniqueSolutions.end()) {
-                        ;
-                    } else {
-                        uniqueSolutions.push_back(visitor);
-                    }
-                } else {
-                    uniqueSolutions.push_back(visitor);
-            }
-        }
-    }
     if ( verbose ) {
-        vector<vector<Piece>>* vP;
-        if ( uniquesolutions ) {
+//        vector<Solution> *solutions = Singleton::GetInstance()->getAllSolution();
+        vector<Solution> uniqueSolutions = vector<Solution>();
+
+        vector<Solution>* vP;
+        if ( uqSolution ) {
             vP = &uniqueSolutions;
         } else {
-            vP = Singleton::GetInstance()->getAllSolutions();
+            vP = Singleton::GetInstance()->getAllSolution();
         }
         for ( auto solution : *vP ) {
-            for (auto p : solution) {
+            for (auto p : solution.getPieces()) {
                 p.print();
             }
         cout << endl;
@@ -339,69 +310,37 @@ int main(int argc, char** argv) {
     printf("Here are the solutions:");
     cout << endl;
 
+    string divider = "";
+    for (int i = 0; i < Singleton::GetInstance()->getRowSize() * (3 + 5) ; ++i) {
+        divider += "-";
+    }
+    map<string,Solution>::iterator it_solmap;
+    for( it_solmap = solmap->begin(); it_solmap != solmap->end() ; ++it_solmap ) {
+        if ( verbose ) cout << it_solmap->first << endl;
+        cout << termcolor::blue << divider << termcolor::reset << "\n";
+        for ( int i = 0; i < Singleton::GetInstance()->getRowSize() * 2; ++i) {
+        cout << termcolor::blue << "| " << termcolor::reset;
+        for ( int j = 0; j < Singleton::GetInstance()->getRowSize(); ++j) {
+            string sC = it_solmap->second.getMatrix()[i][j]; // matrix[i][j];
+            string sC1 = sC.substr(0,1);
+            string sC2 = sC.substr(1,1);
+            colorField(sC1);
+            colorField(sC2);
+            cout << termcolor::blue << "| " << termcolor::reset;
+        }
+        if (i % 2 != 0 )  {
+            cout << endl << termcolor::blue<< divider << termcolor::reset;
+        }
+        cout << endl;
+    }
+}
 
-
-    unsigned long M =  Singleton::GetInstance()->getRowSize() * 2;
-    unsigned long N =  Singleton::GetInstance()->getRowSize();
-    unsigned long  offset = 0;
-    string default_value = "_";
-    vector<string> v(N, default_value);
-    vector<vector<string>> matrix(M, v);
-    for (auto solution : ( uniquesolutions ?  uniqueSolutions : *Singleton::GetInstance()->getAllSolutions() )) {
-        int counter = 0;
-            for (int i = 0; i < Singleton::GetInstance()->getRowSize() * 2; ++i ) {
-            for ( int j = 0; j < Singleton::GetInstance()->getRowSize();  ++j ) {
-                 if ( i > 11 ){
-                     offset = Singleton::GetInstance()->getRowSize() * 6;
-                 } else if ( i > 9 ){
-                     offset = Singleton::GetInstance()->getRowSize() * 5;
-                 } else if ( i > 7 ){
-                     offset = Singleton::GetInstance()->getRowSize() * 4;
-                 } else if ( i > 5 ){
-                     offset = Singleton::GetInstance()->getRowSize() * 3;
-                 } else if ( i > 3 ){
-                     offset = Singleton::GetInstance()->getRowSize() * 2;
-                 } else if ( i > 1 ) {
-                     offset = Singleton::GetInstance()->getRowSize() * 1;
-                 } else if ( i > -1 ) {
-                     offset = 0;
-                 }
-                 if (i % 2 == 0 ) {
-                     matrix[i][j] = solution[j + offset].getColors().substr(0,2);
-
-                 }  else {
-                     matrix[i][j] = solution[j + offset].getColors().substr(3,1) + solution[j + offset].getColors().substr(2,1);
-                 }
-            }
-            ++counter;
-         }
-         string divider = "";
-         for (int i = 0; i < Singleton::GetInstance()->getRowSize() * (3 + 5) ; ++i) {
-             divider += "-";
-         }
-         cout << termcolor::blue << divider << termcolor::reset << "\n";
-         for ( int i = 0; i < Singleton::GetInstance()->getRowSize() * 2; ++i) {
-             cout << termcolor::blue << "| " << termcolor::reset;
-             for ( int j = 0; j < Singleton::GetInstance()->getRowSize(); ++j) {
-                 string sC = matrix[i][j];
-                 string sC1 = sC.substr(0,1);
-                 string sC2 = sC.substr(1,1);
-                 colorField(sC1);
-                 colorField(sC2);
-                 cout << termcolor::blue << "| " << termcolor::reset;
-             }
-             if (i % 2 != 0 )  {
-                 cout << endl << termcolor::blue<< divider << termcolor::reset;
-             }
-             cout << endl;
-         }
-     cout << endl;
-     }
-  
+    
     line();
-    cout << termcolor::reset << "number of solutions: " << Singleton::GetInstance()->getNumSolutions()<< endl;
-    cout << termcolor::reset << "number of unique solutions: " << uniqueSolutions.size() << endl;
+    cout << termcolor::reset << "number of solutions found by the algorithm: " << Singleton::GetInstance()->getNumSolutions()<< endl;
+    cout << termcolor::reset << "number of unique solutions: " << solmap->size() << endl;
     cout << "number of iterations: " << *Singleton::GetInstance()->getNumIterations()<< endl;
+//    cout << "max. depth: " << Singleton::GetInstance()->getDepth() << endl;
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
     printf("Time measured: %.3f seconds.\n", elapsed.count() * 1e-9);
     line();
